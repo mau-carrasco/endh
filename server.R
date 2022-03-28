@@ -15,6 +15,8 @@ library(labelled)
 
 endh <- readRDS("endh2020.rds")
 
+endh2018 <- haven::read_sav("endh2018.sav")
+
 endh <- endh %>% rename(indice_tortura_p28 = indice_tortura) %>%
     mutate(p64 = case_when(p64 == 1 ~ "Creyente practicante",
                            p64 == 2 ~ "Creyente no practicante",
@@ -64,7 +66,7 @@ shinyServer(function(input, output) {
         plot(datos_grafico$variable,
              ylab = "Frecuencia",
              col = RColorBrewer::brewer.pal(n_distinct(datos_grafico$variable), "Blues"))
-    })
+    }, res = 96)
     
     output$plot2 <- renderPlot({
         
@@ -109,7 +111,7 @@ shinyServer(function(input, output) {
              ylab = "Niveles",
              xlab = paste0(titulo2),
              col = paleta4)
-    })
+    }, res = 96)
     
     output$plot3 <- renderPlot({
 
@@ -134,7 +136,7 @@ shinyServer(function(input, output) {
              breaks=7,
              main = NULL,
              col = RColorBrewer::brewer.pal(n_distinct(datos_grafico1$variable), "Blues"))
-    })
+    }, res = 96)
     
     output$plot4 <- renderPlot({
         
@@ -162,7 +164,7 @@ shinyServer(function(input, output) {
              breaks=7,
              main = NULL,
              col = RColorBrewer::brewer.pal(n_distinct(datos_grafico1$variable), "Blues"))
-    })
+    }, res = 96)
     
     output$tabla1 <- renderTable({
         
@@ -684,5 +686,91 @@ shinyServer(function(input, output) {
         paste0(var, " Respuesta según ", titulo2)
         
     })
+    
+    output$download2020_sav <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2020.sav")
+        },
+        content = function(file) {
+            haven::write_sav(endh, file)
+        })
+    
+    output$download2020_dta <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2020.dta")
+        },
+        content = function(file) {
+            haven::write_dta(endh, file)
+        })
+    
+    output$download2020_rds <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2020.rds")
+        },
+        content = function(file) {
+            readr::write_rds(endh, file)
+        })
+    
+    output$cuestionario2020 <- downloadHandler(
+        filename = "Cuestionario ENDH - 2020.pdf",
+        content = function(file) {
+            file.copy("www/cuestionario2020.pdf", file)
+        })
+    
+    output$informe2020 <- downloadHandler(
+        filename = "Informe ENDH - 2020.pdf",
+        content = function(file) {
+            file.copy("www/informe2020.pdf", file)
+        })
+    
+    output$codigos2020 <- downloadHandler(
+        filename = "Libro de codigos ENDH - 2020.pdf",
+        content = function(file) {
+            file.copy("www/codigos2020.pdf", file)
+        })
+    
+    
+    output$download2018_dta <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2018.dta")
+        },
+        content = function(file) {
+            haven::write_dta(endh2018, file)
+        })
+    
+    output$download2018_sav <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2018.sav")
+        },
+        content = function(file) {
+            haven::write_sav(endh2018, file)
+        })
+    
+    output$download2018_rds <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2018.rds")
+        },
+        content = function(file) {
+            readr::write_rds(endh2018, file)
+        })
+    
+    output$cuestionario2018 <- downloadHandler(
+        filename = "Cuestionario ENDH - 2018.pdf",
+        content = function(file) {
+            file.copy("www/cuestionario2018.pdf", file)
+        })
+    
+    output$informe2018 <- downloadHandler(
+        filename = "Informe ENDH - 2018.pdf",
+        content = function(file) {
+            file.copy("www/informe2018.pdf", file)
+        })
+    
+    output$codigos2018 <- downloadHandler(
+        filename = "Libro de codigos ENDH - 2018.pdf",
+        content = function(file) {
+            file.copy("www/codigos2018.pdf", file)
+        })
+    
 
 })

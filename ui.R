@@ -41,13 +41,18 @@ shinyUI(navbarPage(
     # Nombre de la aplicación
     title = strong("Encuesta Nacional de Derechos Humanos"),
     
+    tags$script(HTML("var header = $('.navbar > .container-fluid');
+header.append('<div style=\"float:right\"><a href=\"https://github.com/mau-carrasco/endh\"><img src=\"https://cdn-icons-png.flaticon.com/512/25/25231.png\" alt=\"alt\" style=\"float:right;width:33px;height:41px;padding-top:10px;\"> </a></div>');
+    console.log(header)")
+    ),
+    
     # Tema
     theme = shinytheme("simplex"),
     tabPanel("Inicio",
              h4(strong("Bienvenidos y bienvenidas a la app web de la Encuesta Nacional de Derechos Humanos del INDH")),
              br(),
              p("En este sitio web podrás visualizar y analizar los resultados de la última Encuesta Nacional de Derechos Humanos (ENDH), realizada por el Instituto Nacional de Derechos Humanos de Chile (INDH) durante el año 2020, en pleno contexto de pandemia."),
-             p("El objetivo general de la ENDH es medir las percepciones, opiniones y experiencias de la población mayor de 14 años residente en Chile en relación a los derechos humanos. Para cumplir con este objetivo, el INDH aplica cada dos años una encuesta presencial y en hogares a cerca de 7000 personas, seleccionadas de manera aleatoria y probabilística en cada una de las regiones del país. En la sección Datos, encontrarás las bases de datos de todas las ENDH realizadas entre los años 2010 y 2020, con sus respectivos manuales e informes metodológicos."),
+             p("El objetivo general de la ENDH es medir las percepciones, opiniones y experiencias de la población mayor de 14 años residente en Chile en relación a los derechos humanos. Para cumplir con este objetivo, el INDH aplica cada dos años una encuesta presencial y en hogares a cerca de 7000 personas, seleccionadas de manera aleatoria y probabilística en cada una de las regiones del país. En la sección Datos, encontrarás las bases de datos de todas las ENDH realizadas entre los años 2010 y 2020, con sus respectivos cuestionarios, manuales e informes metodológicos."),
              p("El siguiente video te explica cómo puedes visualizar, describir y comparar los resultados de la última ENDH, realizada entre los meses de mayo y septiembre de 2020:"),
              br(),
              fluidRow(column(12,
@@ -207,7 +212,32 @@ shinyUI(navbarPage(
     tabPanel("Datos",
              h4(strong("Informes y Bases de datos")),
              p("En esta sección encontrarás los manuales y las bases de datos de todas las versiones de la Encuesta Nacional de Derechos Humanos, realizadas por el INDH de Chile entre 2010 y 2020."),
-             p(strong("Quinta Encuesta Nacional de Derechos Humanos - 2020: "))
+             fluidRow(
+                 column(4,
+                        h5(strong("Sexta Encuesta Nacional de Derechos Humanos - 2020: ")),
+                        strong("Base de datos:"),
+                        p(downloadLink("download2020_sav", "SPSS"), " | ", downloadLink("download2020_dta", "STATA"), " | ", downloadLink("download2020_rds", "R")),
+                        strong("Documentos: "),
+                        p(downloadLink("cuestionario2020", "Cuestionario"), "|", downloadLink("informe2020", "Informe"), " | ", downloadLink("codigos2020", "Libro de códigos")),
+                        ),
+                 column(4,
+                        h5(strong("Quinta Encuesta Nacional de Derechos Humanos - 2018: ")),
+                        strong("Base de datos: "),
+                        p(downloadLink("download2018_sav", "SPSS"), " | ", downloadLink("download2018_dta", "STATA"), " | ", downloadLink("download2018_rds", "R")),
+                        strong("Documentos: "),
+                        p(downloadLink("cuestionario2018", "Cuestionario"), "|", downloadLink("informe2018", "Informe"), " | ", downloadLink("codigos2018", "Libro de códigos")),
+                        ),
+                 column(4,
+                        h5(strong("Cuarta Encuesta Nacional de Derechos Humanos - 2016: ")),
+                        )
+             ),
+             br(),
+             p(strong("Tercera Encuesta Nacional de Derechos Humanos - 2014: ")),
+             br(),
+             p(strong("Segunda Encuesta Nacional de Derechos Humanos - 2012: ")),
+             br(),
+             p(strong("Primera Encuesta Nacional de Derechos Humanos - 2010: ")),
+             br()
              )
 )
 )
