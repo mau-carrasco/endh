@@ -9,3 +9,12 @@ En el archivo ui.R encontrarás la codificación de la interfaz de usurio de la 
 Por su parte, los archivos .SAV o .RDS corresponden a las bases de datos de las ENDH realizadas en los años 2010, 2012, 2014, 2016, 2018 y 2020. Cada una de estas bases está contenida en un archivo único, disponible en la sección datos de la app web.
 
 Ante cualquier duda o consulta respecto a los datos y los códigos que contiene este repositorio, escríbanos a mcarrasco@indh.cl o snunez@indh.cl
+
+library(shiny)
+
+# Easiest way is to use runGitHub
+runGitHub("shiny_example", "rstudio")
+
+# Run a tar or zip file directly
+runUrl("https://github.com/rstudio/shiny_example/archive/master.tar.gz")
+runUrl("https://github.com/rstudio/shiny_example/archive/master.zip")
