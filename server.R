@@ -17,6 +17,10 @@ endh <- readRDS("endh2020.rds")
 
 endh2018 <- haven::read_sav("endh2018.sav")
 
+endh2015 <- haven::read_sav("endh2015.sav")
+
+endh2013 <- haven::read_sav("endh2013.sav")
+
 endh <- endh %>% rename(indice_tortura_p28 = indice_tortura) %>%
     mutate(p64 = case_when(p64 == 1 ~ "Creyente practicante",
                            p64 == 2 ~ "Creyente no practicante",
@@ -772,5 +776,88 @@ shinyServer(function(input, output) {
             file.copy("www/codigos2018.pdf", file)
         })
     
+    output$download2015_dta <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2015.dta")
+        },
+        content = function(file) {
+            haven::write_dta(endh2015, file)
+        })
+    
+    output$download2015_sav <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2015.sav")
+        },
+        content = function(file) {
+            haven::write_sav(endh2015, file)
+        })
+    
+    output$download2015_rds <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2015.rds")
+        },
+        content = function(file) {
+            readr::write_rds(endh2015, file)
+        })
+    
+    output$cuestionario2015 <- downloadHandler(
+        filename = "Cuestionario ENDH - 2015.pdf",
+        content = function(file) {
+            file.copy("www/cuestionario2015.pdf", file)
+        })
+    
+    output$informe2015 <- downloadHandler(
+        filename = "Informe ENDH - 2015.pdf",
+        content = function(file) {
+            file.copy("www/informe2015.pdf", file)
+        })
+    
+    output$codigos2015 <- downloadHandler(
+        filename = "Libro de codigos ENDH - 2015.pdf",
+        content = function(file) {
+            file.copy("www/codigos2015.pdf", file)
+        })
+    
+    output$download2013_dta <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2013.dta")
+        },
+        content = function(file) {
+            haven::write_dta(endh2013, file)
+        })
+    
+    output$download2013_sav <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2013.sav")
+        },
+        content = function(file) {
+            haven::write_sav(endh2013, file)
+        })
+    
+    output$download2013_rds <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2013.rds")
+        },
+        content = function(file) {
+            readr::write_rds(endh2013, file)
+        })
+    
+    output$cuestionario2013 <- downloadHandler(
+        filename = "Cuestionario ENDH - 2013.pdf",
+        content = function(file) {
+            file.copy("www/cuestionario2013.pdf", file)
+        })
+    
+    output$informe2013 <- downloadHandler(
+        filename = "Informe ENDH - 2013.pdf",
+        content = function(file) {
+            file.copy("www/informe2013.pdf", file)
+        })
+    
+    output$codigos2013 <- downloadHandler(
+        filename = "Libro de codigos ENDH - 2013.pdf",
+        content = function(file) {
+            file.copy("www/codigos2013.pdf", file)
+        })
 
 })
