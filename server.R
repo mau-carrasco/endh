@@ -1,12 +1,3 @@
-#
-# This is the server logic of a Shiny web application. You can run the
-# application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(shinythemes)
 library(tidyverse)
@@ -20,6 +11,8 @@ endh2018 <- haven::read_sav("endh2018.sav")
 endh2015 <- haven::read_sav("endh2015.sav")
 
 endh2013 <- haven::read_sav("endh2013.sav")
+
+endh2011 <- haven::read_sav("endh2011.sav")
 
 endh <- endh %>% rename(indice_tortura_p28 = indice_tortura) %>%
     mutate(p64 = case_when(p64 == 1 ~ "Creyente practicante",
@@ -858,6 +851,48 @@ shinyServer(function(input, output) {
         filename = "Libro de codigos ENDH - 2013.pdf",
         content = function(file) {
             file.copy("www/codigos2013.pdf", file)
+        })
+    
+    output$download2011_dta <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2011.dta")
+        },
+        content = function(file) {
+            haven::write_dta(endh2011, file)
+        })
+    
+    output$download2011_sav <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2011.sav")
+        },
+        content = function(file) {
+            haven::write_sav(endh2011, file)
+        })
+    
+    output$download2011_rds <- downloadHandler(
+        filename = function() {
+            paste0("ENDH-2011.rds")
+        },
+        content = function(file) {
+            readr::write_rds(endh2011, file)
+        })
+    
+    output$cuestionario2011 <- downloadHandler(
+        filename = "Cuestionario ENDH - 2011.pdf",
+        content = function(file) {
+            file.copy("www/cuestionario2011.pdf", file)
+        })
+    
+    output$informe2011 <- downloadHandler(
+        filename = "Informe ENDH - 2011.pdf",
+        content = function(file) {
+            file.copy("www/informe2011.pdf", file)
+        })
+    
+    output$codigos2011 <- downloadHandler(
+        filename = "Libro de codigos ENDH - 2011.pdf",
+        content = function(file) {
+            file.copy("www/codigos2011.pdf", file)
         })
 
 })

@@ -1,12 +1,3 @@
-#
-# This is the user-interface definition of a Shiny web application. You can
-# run the application by clicking 'Run App' above.
-#
-# Find out more about building applications with Shiny here:
-#
-#    http://shiny.rstudio.com/
-#
-
 library(shiny)
 library(shinythemes)
 library(tidyverse)
@@ -42,7 +33,7 @@ shinyUI(navbarPage(
     title = strong("Encuesta Nacional de Derechos Humanos"),
     
     tags$script(HTML("var header = $('.navbar > .container-fluid');
-header.append('<div style=\"float:right\"><a href=\"https://github.com/mau-carrasco/endh\"><img src=\"https://cdn-icons-png.flaticon.com/512/25/25231.png\" alt=\"alt\" style=\"float:right;width:33px;height:41px;padding-top:10px;\"> </a></div>');
+header.append('<div style=\"float:right\"><a href=\"https://www.indh.cl\"><img src=\"logo.png\" alt=\"alt\" style=\"float:right;height:41px;padding-top:10px;\"> </a></div>');
     console.log(header)")
     ),
     
@@ -211,7 +202,7 @@ header.append('<div style=\"float:right\"><a href=\"https://github.com/mau-carra
     ),
     tabPanel("Datos",
              h4(strong("Informes y Bases de datos")),
-             p("En esta sección encontrarás los manuales y las bases de datos de todas las versiones de la Encuesta Nacional de Derechos Humanos, realizadas por el INDH de Chile entre 2010 y 2020."),
+             p("En esta sección encontrarás las bases de datos y los documentos técnicos de todas las versiones de la Encuesta Nacional de Derechos Humanos, realizadas por el INDH de Chile entre 2011 y 2020."),
              fluidRow(
                  column(6,
                         h5(strong("Quinta Encuesta Nacional de Derechos Humanos - 2020: ")),
@@ -244,8 +235,16 @@ header.append('<div style=\"float:right\"><a href=\"https://github.com/mau-carra
                         p(downloadLink("cuestionario2013", "Cuestionario"), "|", downloadLink("informe2013", "Informe"), " | ", downloadLink("codigos2013", "Libro de códigos")),
                  )
              ),
+             fluidRow(
+                 column(6,
+                        h5(strong("Primera Encuesta Nacional de Derechos Humanos - 2011: ")),
+                        strong("Base de datos: "),
+                        p(downloadLink("download2011_sav", "SPSS"), " | ", downloadLink("download2011_dta", "STATA"), " | ", downloadLink("download2011_rds", "R")),
+                        strong("Documentos: "),
+                        p(downloadLink("cuestionario2011", "Cuestionario"), "|", downloadLink("informe2011", "Informe"), " | ", downloadLink("codigos2011", "Libro de códigos"))
+                        )
+             ),
              br(),
-             p(strong("Primera Encuesta Nacional de Derechos Humanos - 2010: ")),
              br()
              )
 )
